@@ -6,7 +6,8 @@
    提取码：xwv2 
 2. 购买方式：https://item.taobao.com/item.htm?ft=t&id=632428000614 
 3. 在线文档：https://www.cnblogs.com/Li-Share/p/17011450.html
-4. 本公司所有学习板或相关产品资料： https://www.cnblogs.com/Li-Share/p/15222624.html
+4. GitHub地址: https://github.com/GZLDLLJ/MiniGamepad_ARM.git
+5. 本公司所有学习板或相关产品资料： https://www.cnblogs.com/Li-Share/p/15222624.html
 
 
 - 广州联盾电子科技有限公司
