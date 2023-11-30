@@ -1,6 +1,25 @@
 # 序
 
+
+
 由于作者水平有限，文档和视频中难免有出错和讲得不好的地方，欢迎各位读者和观众善意地提出意见和建议，谢谢！
+
+
+
+| **实例**             | **描述**                             |
+| -------------------- | ------------------------------------ |
+| Eg1_Joystick         | 实现一个Joystick摇杆设备             |
+| Eg2_WS2812B          | 点亮WS2812B灯珠并实现七彩渐变        |
+| Eg3_MultiTimer       | 移植MultiTimer软件定时器模块         |
+| Eg4_Mouse            | 实现模拟鼠标功能                     |
+| Eg5_KeyBoard         | 实现模拟键盘功能                     |
+| Eg6_DoubleJoystick   | 实现一个USB双摇杆                    |
+| Eg7_CompositeGMK     | 实现Joystick、MOUSE、Keyboard的组合  |
+| Eg8_Gamepad          | 实现游戏手柄Gamepad的功能            |
+| Eg9_AbsoluteMouse    | 实现绝对值鼠标的功能                 |
+| Eg10_Xinput          | 实现Xbox手柄功能，Xinput（出厂默认） |
+| Eg11_Xinput01        | 外接摇杆电位器实现Xbox手柄功能       |
+| Eg12_MultiAxisButton | 实现8轴32键摇杆                      |
 
 # 第一部分、硬件概述
 
@@ -2312,7 +2331,7 @@ void Xinput_Handle(void)
 
 
 
-## 3.11 实例Eg11_Xinput
+## 3.11 实例Eg11_Xinput01
 
 本节目标还是实现Xbox 360 Controller for Windows.
 
@@ -2332,18 +2351,121 @@ void Xinput_Handle(void)
 
 
 
-## 3.12 实例Eg12_Xinput
+## 3.12 实例Eg12_MultiAxisButton
 
-本节目标还是实现Xbox 360 Controller for Windows.
+本节目标是实现多轴多按键摇杆
 
-### 3.10.1硬件设计
+### 3.12.1硬件设计
 
-参考原理图； H2外拓摇杆
+参考原理图； 
 
-### 3.10.2 软件设计
+### 3.12.2 软件设计
 
-本节在上一节的基础上修改了ADC和按键部分，具体请自行查看代码和视频
+1. 准备摇杆报表，
 
-### 3.10.3 下载验证
+```c
+__ALIGN_BEGIN static uint8_t CUSTOM_HID_ReportDesc_FS[USBD_CUSTOM_HID_REPORT_DESC_SIZE] __ALIGN_END =
+{
+  /* USER CODE BEGIN 0 */
+        0x05, 0x01,                                  // Usage Page (Generic Desktop)
+        0x09, 0x04,                                  // Usage (Joystick)
+        0xA1, 0x01,                                  // Collection (Application)
+        0x05, 0x01,                                  // Usage Page (Generic Desktop)
+        0x09, 0x01,                                  // Usage (Pointer)
+        0xA1, 0x02,                                  // Collection (Logical)
+        0x09, 0x30,                                  // Usage (X)
+        0x09, 0x31,                                  // Usage (Y)
+        0x09, 0x32,                                  // Usage (Z)
+        0x09, 0x33,                                  // Usage (Rx)
+        0x09, 0x34,                                  // Usage (Ry)
+        0x09, 0x35,                                  // Usage (Rz)
+        0x09, 0x36,                                  // Usage (Slider)
+        0x09, 0x37,                                  // Usage (Dial)
+        0x15, 0x00,                                  // Logical Minimum (0)
+        0x26, 0xFF, 0x03,                            // Logical Maximum (1023)
+        0x75, 0x10,                                  // Report Size (16)
+        0x95, 0x08,                                  // Report Count (8)
+        0x81, 0x02,                                  // Input (Data,Variable,Absolute)
+        0x05, 0x09,                                  // Usage Page (Button)
+        0x19, 0x01,                                  // Usage Minimum (Button 1)
+        0x29, 0x20,                                  // Usage Minimum (Button 32)
+        0x15, 0x00,                                  // Logical Minimum (0)
+        0x25, 0x01,                                  // Logical Maximum (1)
+        0x75, 0x01,                                  // Report Size (1)
+        0x95, 0x20,                                  // Report Count (32)
+        0x81, 0x02,                                  // Input (Data,Variable,Absolute)
+        0xC0,                                        // End Collection
+        0xA1, 0x02,                                  // Collection (Logical)
+        0x95, 0x07,                                  // Report Count (7)
+        0x75, 0x08,                                  // Report Size (8)
+        0x09, 0x01,                                  // Usage (Button 1)
+        0x91, 0x02,                                  // Output (Data,Variable,Absolute)
+        0xC0,                                        // End Collection    
 
-我们把固件程序下载进去，Xbox 360 Controller for Windows出现在电脑上。
+  /* USER CODE END 0 */
+  0xC0    /*     END_COLLECTION	             */
+};
+```
+
+2. 最后解析数据。
+
+```c
+//处理并上报数据
+void Gp_SendReport(void)
+{
+	u8 Ktemp=0;
+	u16 X=0,Y=0;
+	for(u8 i=0; i<AD_DATA_SIZE;)
+	{
+		AdXSum += AD_DATA[i];
+		i++;
+		AdYSum += AD_DATA[i];
+		i++;
+	}
+	Xtemp=AdXSum/10;
+	AdXSum=0;
+	Ytemp=AdYSum/10;
+	AdYSum=0;
+	if(Xtemp>Xmax)
+		Xtemp=Xmax;
+	if(Xtemp<Xmin)
+		Xtemp=Xmin;
+
+	if(Ytemp>Ymax)
+		Ytemp=Ymax;
+	if(Ytemp<Ymin)
+		Ytemp=Ymin;		
+
+
+    X=(uint16_t)map( Xtemp, Xmin, Xmax, 0, 1023 );
+    Y=(uint16_t)map( Ytemp, Ymin, Ymax, 0, 1023 );
+	Ktemp=key_scan();
+	Joystick_Report[0]=Y;
+	Joystick_Report[1]=Y>>8;
+	Joystick_Report[2]=X;
+	Joystick_Report[3]=X>>8;
+	Joystick_Report[4]=Y;
+	Joystick_Report[5]=Y>>8;
+	Joystick_Report[6]=X;
+	Joystick_Report[7]=X>>8;
+	Joystick_Report[8]=Y;
+	Joystick_Report[9]=Y>>8;
+	Joystick_Report[10]=X;
+	Joystick_Report[11]=X>>8;	
+	Joystick_Report[12]=Y;
+	Joystick_Report[13]=Y>>8;
+	Joystick_Report[14]=X;
+	Joystick_Report[15]=X>>8;
+	Joystick_Report[16]=Ktemp;
+	Joystick_Report[17]=Ktemp;
+	Joystick_Report[18]=Ktemp;
+	Joystick_Report[19]=Ktemp;
+	USBD_CUSTOM_HID_SendReport(&hUsbDeviceFS,(u8*)&Joystick_Report, 20);	
+}
+```
+
+
+
+### 3.12.3 下载验证
+
+我们把固件程序下载进去出现多轴多按键。
