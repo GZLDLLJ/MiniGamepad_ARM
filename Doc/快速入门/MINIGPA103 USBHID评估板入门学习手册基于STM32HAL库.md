@@ -1,3 +1,5 @@
+
+
 # 序
 
 
@@ -26,7 +28,7 @@
 ## 1.1 实物概图
 
  图1.1Gamepad实物概图
-![image](https://img2022.cnblogs.com/blog/1966993/202210/1966993-20221015162528917-648827262.jpg)
+![image](https://img-blog.csdnimg.cn/img_convert/dfff3a749742b6612d069b014bd9dda7.jpeg)
 
 如图1.1所示Gamepad评估板配置了8个6*6轻触按键，一个摇杆（Joystick），搭载一颗WS2812B灯珠，并将UART1串口，编程接口（SWD），外接Joystick接口，microUSB接口引出;  
 
@@ -34,7 +36,7 @@
 ## 1.2 Gamepad原理图
 Gamepad原理图如图1.2所示，如看不清可打开Doc目录下的PDF文档查阅  
 		图1.2 Gamepad原理图  
-![image](https://img2022.cnblogs.com/blog/1966993/202211/1966993-20221112115509438-565811249.png)
+![image](https://img-blog.csdnimg.cn/img_convert/085c04132e5c2b3e56f5c67c07d44270.png)
 
 
 
@@ -56,7 +58,7 @@ Gamepad原理图如图1.2所示，如看不清可打开Doc目录下的PDF文档�
 
 图1.3 Joystick原理图
 
-   ![image](https://img2020.cnblogs.com/blog/1966993/202112/1966993-20211214224348752-1607121797.png)
+   ![image](https://img-blog.csdnimg.cn/img_convert/546a0b0c987ea82bd3750cea3f03865d.png)
 
 其中VRX1与VRY1是摇杆的电位器输出的电压信号（ADC检测)；SW1则是按键，右侧H1是外接的Joystick口备用;  
 
@@ -65,7 +67,7 @@ Gamepad原理图如图1.2所示，如看不清可打开Doc目录下的PDF文档�
 图1.4 KEY原理图  
 
 
-![image](https://img2020.cnblogs.com/blog/1966993/202112/1966993-20211214224447009-112297073.png)
+![image](https://img-blog.csdnimg.cn/img_convert/6f986d0465f67e08f9f23ccea54cd1f0.png)
 
 
 如图1.4是KEY原理图，我们只要配置8个GPIO作为输入去检测按键信号;  
@@ -91,7 +93,7 @@ USB设备开发需要具备一定的USB设备开发知识；关于Usb的学习�
 
 首先是初始化代码，我们通过STM32cubeMX软件去生成代码，具体配置请打开GamePad.ioc查阅，配套视频也有关键部分的讲解，这里不再赘述;  我们的工程使用的是Keil-MDK编译器，生成的工程目录如图1.5  
 
-![image](https://img2020.cnblogs.com/blog/1966993/202112/1966993-20211214224618747-792020857.png)
+![image](https://img-blog.csdnimg.cn/img_convert/4aa340a103f8f670fbc029adc9914c12.png)
 图1.5 工程目录
 其中
 
@@ -472,11 +474,11 @@ key_scan是扫描按键，map是转换数据的范围，因为我们的ADC采样
 
 ### 3.1.3 下载验证
 我们把固件程序下载进去可以，打开“设备与打印机”可以看到USB设备枚举成了一个Gamepad，如下图。  
-![image](https://img2020.cnblogs.com/blog/1966993/202112/1966993-20211214231513890-445089246.png)  
+![image](https://img-blog.csdnimg.cn/img_convert/fc440bb69a784633f43f7b094a88b10a.png)  
 
 图1.5 Gamepad设备  
 右键打开游戏控制器后，点击属性得到下图所示界面  
-![image](https://img2020.cnblogs.com/blog/1966993/202112/1966993-20211214231614778-314243803.png)
+![image](https://img-blog.csdnimg.cn/img_convert/b2628a27dfafcea5ec16ed479ab680ff.png)
 图1.6 游戏控制器  
 我们可以摇Joystick和按按键可以发现上图游戏控制器界面也跟着响应。
 
@@ -497,9 +499,9 @@ https://www.bilibili.com/video/BV1oS4y1b72F/?vd_source=2bbde87de845d5220b1d8ba07
 
 ### 3.2.1硬件设计
  如图1.7和1.8所示MCU通过1根数据线控制WS2812B
- ![image](https://img2020.cnblogs.com/blog/1966993/202112/1966993-20211214232506349-1712207719.png)
+ ![image](https://img-blog.csdnimg.cn/img_convert/59839881f3d704bf162c2093679d1c67.png)
 图1.7 WS2812B单颗灯珠原理图  
-![image](https://img2020.cnblogs.com/blog/1966993/202112/1966993-20211214232618275-889665108.png)
+![image](https://img-blog.csdnimg.cn/img_convert/0fcd636975f274cdc73f626b835d2200.png)
 图1.8 MCU连接WS2812控制引脚 
 
 
@@ -507,10 +509,10 @@ https://www.bilibili.com/video/BV1oS4y1b72F/?vd_source=2bbde87de845d5220b1d8ba07
 ### 3.2.2 软件设计
 
 WS2812B要求的时序
-![image](https://img2022.cnblogs.com/blog/1966993/202211/1966993-20221110171925970-1084375874.png)
+![image](https://img-blog.csdnimg.cn/img_convert/d7661749bd25975514ea452f58c4a876.png)
 
    我们将DIN配置为PWM+DMA的方式去驱动WS2812B，初始化配置如图1.9所示  
-   ![image](https://img2020.cnblogs.com/blog/1966993/202112/1966993-20211214233059962-2123538503.png)  
+   ![image](https://img-blog.csdnimg.cn/img_convert/e4682d8537eeb99041de838d2104a734.png)  
    图1.9 DIN引脚配置  
    MCU主频为72M，Counter period=89,即计数周期=1/72*89约等于1.23us  ;根据高中物理知识周期等于频率的倒数T=1/f可得1/72Mhz=0.0138888888888889us,
 
@@ -532,7 +534,7 @@ https://www.twblogs.net/a/5d5f26e7bd9eee5327fdec7c/?lang=zh-cn
 
 ### 3.2.3 下载验证
 我们把固件程序下载进去可以，可以看到板载的5050灯珠，进行七彩变化； 建议看视频效果。
-![image](https://img2022.cnblogs.com/blog/1966993/202211/1966993-20221110171953828-1565635387.png)
+![image](https://img-blog.csdnimg.cn/img_convert/36a872a281dd0f64ddf61a23eddf8e2d.png)
 
 
 
@@ -700,9 +702,9 @@ int main(void)
 目标是模拟鼠标功能，具备XY坐标和左右中键以及滚轮上下的鼠标功能。
 ### 3.4.1硬件设计
 如图2.0所示，我们将使用VRX1和VRY1作为鼠标相对坐标，SW1作为鼠标中键  
-![image](https://img2020.cnblogs.com/blog/1966993/202112/1966993-20211214233602931-400523260.png)
+![image](https://img-blog.csdnimg.cn/img_convert/a1fdaf2fee15d1e024d0fd0184743f9c.png)
        图2.0 Joystick原理图
-![image](https://img2020.cnblogs.com/blog/1966993/202112/1966993-20211214233636774-1038002781.png)
+![image](https://img-blog.csdnimg.cn/img_convert/626ebdc37c20104f5f13a38ed3dbaa23.png)
 如上图2.1，UP，DN，LF，RG分别代表鼠标滚轮向上，向下，鼠标左键，右键；  
 
 ### 3.4.2 软件设计
@@ -1129,10 +1131,10 @@ void GamepadHandle(void)
 ### 3.6.3 下载验证
 
 我们把固件程序下载进去，可以看到游戏控制器界面有两个控制器，调开属性界面两个都可以控制；
-![image](https://img2022.cnblogs.com/blog/1966993/202210/1966993-20221018221056179-1624529137.png)
+![image](https://img-blog.csdnimg.cn/img_convert/cf3be0c227d09e283be9890815b63aed.png)
 
 我们可以打开Bus Hound，抓取报文，端点0传输的是枚举过程，然后我们看Device：66.1的4个字节的，报文01 7e 7d 00是Report id为1的报文， 报文02 7e 7d 00是Report id为2的报文，因为我们上报的是相同的数据，就ID不同，故而控制的是两个joystick设备；
-![image](https://img2022.cnblogs.com/blog/1966993/202210/1966993-20221018221123968-1460373926.png)
+![image](https://img-blog.csdnimg.cn/img_convert/02e565e8df1c8825ee63399fededd04f.png)
 
 
 
@@ -1634,12 +1636,12 @@ int main(void)
 本节目标是实现Gamepad，Gamepad和Joystick是有很大区别的，我们先看一下Joystick，如下图Joystick是带有XY轴并带有若干个按键的HID。
 
 
-![image](https://img2023.cnblogs.com/blog/1966993/202212/1966993-20221228223710523-725267649.png)
+![image](https://img-blog.csdnimg.cn/img_convert/1f0a3a62957197574130c4d13440609a.png)
 
 
 而Gamepad除了XY轴和按键，还有Z轴，Rx和Ry（旋转），并带有视觉头盔。
 
-![image](https://img2023.cnblogs.com/blog/1966993/202212/1966993-20221228223640742-1235345320.png)
+![image](https://img-blog.csdnimg.cn/img_convert/d6fd9bd9b9d0c8d65cc34b904fc9affb.png)
 
 
 本节的就是实现如上图这样一个Gamepad。
@@ -1830,7 +1832,7 @@ void Gamepad_Handle(void)
 
 我们把固件程序下载进去，界面如下图，摇动摇杆，XY轴响应，按下左边4个按键可控制视觉头盔。板子中间四颗按键实现1~4按钮按下。
 
-![image](https://img2023.cnblogs.com/blog/1966993/202212/1966993-20221228223601164-293653265.png)
+![image](https://img-blog.csdnimg.cn/img_convert/a45ace0efbcc85795f3b9a7376c35b03.png)
 
 
 
@@ -2469,3 +2471,191 @@ void Gp_SendReport(void)
 ### 3.12.3 下载验证
 
 我们把固件程序下载进去出现多轴多按键。
+
+## 3.13 实例Eg13_SurfaceDial
+
+目标是实现模拟微软Surface Dial功能；
+大家可以从以下网站查看 Radial Controller径向控制器的实现指南
+https://docs.microsoft.com/enus/windows-hardware/design/component-guidelines/radial-implementation-guide
+同时本节参考了GitHub博主wuhuuu的项目：https://github.com/wuhuuu/SurfaceDial-STM32
+
+### 3.13.1硬件设计
+
+这里我们用一个轴作为模拟Dial旋转偏移量Degree同时UP按键作为Dial的按键；
+
+### 3.13.2 软件设计
+
+我们将usbd_custom_hid_if.c中CUSTOM_HID_ReportDesc_FS修改为Surface Dial的报告描述符;
+
+Surface Dial的报告描述符：
+
+```c
+__ALIGN_BEGIN static uint8_t CUSTOM_HID_ReportDesc_FS[USBD_CUSTOM_HID_REPORT_DESC_SIZE] __ALIGN_END =
+{
+  0x05, 0x01,       
+  0x09, 0x0e,     
+  0xa1, 0x01,      
+  0x85, 10,      
+  0x05, 0x0d,     
+  0x09, 0x21,       
+  0xa1, 0x00,   
+  0x05, 0x09,      
+  0x09, 0x01,     
+  0x95, 0x01,      
+  0x75, 0x01,      
+  0x15, 0x00,      
+  0x25, 0x01,      
+  0x81, 0x02,     
+  0x05, 0x01,     
+  0x09, 0x37,    
+  0x95, 0x01,       
+  0x75, 0x0f,    
+  0x55, 0x0f,     
+  0x65, 0x14,      
+  0x36, 0xf0, 0xf1, 
+  0x46, 0x10, 0x0e, 
+  0x16, 0xf0, 0xf1, 
+  0x26, 0x10, 0x0e, 
+  0x81, 0x06,      
+  0xc0,
+  0xC0              
+};
+```
+
+以上报表描述符通过Usblyzer读出解释如下图
+![在这里插入图片描述](https://img-blog.csdnimg.cn/direct/81acdde9458e4e7aa86f09031f7c2307.png#pic_center)
+
+然后按照报告描述符上面定义的数据，修改Gp_SendReport中的Joystick_Report数组；详见代码
+
+```c
+void Gp_SendReport(void)
+{
+	u8 X=0,Y=0;
+	memset(Joystick_Report,0,4);
+	for(u8 i=0; i<AD_DATA_SIZE;)
+	{
+		AdXSum += AD_DATA[i];
+		i++;
+		AdYSum += AD_DATA[i];
+		i++;
+	}
+	Xtemp=AdXSum/10;
+	AdXSum=0;
+	Ytemp=AdYSum/10;
+	AdYSum=0;
+	if(Xtemp>Xmax)
+		Xtemp=Xmax;
+	if(Xtemp<Xmin)
+		Xtemp=Xmin;
+
+	if(Ytemp>Ymax)
+		Ytemp=Ymax;
+	if(Ytemp<Ymin)
+		Ytemp=Ymin;		
+
+    X=(uint8_t)map( Xtemp, Xmin, Xmax, 0, UINT8_MAX );
+    Y=(uint8_t)map( Ytemp, Ymin, Ymax, 0, UINT8_MAX );
+	
+    if((X>(X_BASE+20))&& press_flag == 0x00)
+    {
+				Joystick_Report[0] = 0x0A;
+				Joystick_Report[1] = 0x3C;
+				Joystick_Report[2] = 0x00;	
+				USBD_CUSTOM_HID_SendReport(&hUsbDeviceFS,(u8*)&Joystick_Report, 3);
+    }
+    if((X<(X_BASE-20))&& press_flag == 0x00)
+    {
+				Joystick_Report[0] = 0x0A;
+				Joystick_Report[1] = 0xC4;
+				Joystick_Report[2] = 0xFF;
+			  USBD_CUSTOM_HID_SendReport(&hUsbDeviceFS,(u8*)&Joystick_Report, 3);
+    }
+    if(((UPKEY)==0)&& press_flag == 0x00)
+    {
+				Joystick_Report[0] = 0x0A;
+				Joystick_Report[1] = 0x01;
+				Joystick_Report[2] = 0x00;
+			  press_flag = 0xff;
+			  USBD_CUSTOM_HID_SendReport(&hUsbDeviceFS,(u8*)&Joystick_Report, 3);				
+    }
+		if(((UPKEY)!=0)&& press_flag == 0xff){
+				Joystick_Report[0] = 0x0A;
+				Joystick_Report[1] = 0x00;
+				Joystick_Report[2] = 0x00;
+			  press_flag = 0x00;
+			  USBD_CUSTOM_HID_SendReport(&hUsbDeviceFS,(u8*)&Joystick_Report, 3);
+		}
+}
+```
+
+根据上图报表描述符Joystick_Report[0]是ReportID,其值为10即0x0A；Joystick_Report[1]中的bit0代表button；Joystick_Report[1]的其他位和Joystick_Report[2]代表Dial，取值-3600~3600；
+
+### 3.13.3 下载验证
+
+我们把固件程序下载进去，按下UP呼出控制器，最后通过摇杆Y轴旋转音量滚轮等功能并对其控制；
+
+
+
+
+
+## 3.14 实例Eg14_Mouse5K
+
+#### 3.13.1 设计目标
+
+1. **功能扩展**：在传统3键鼠标（左/右/中键）基础上，新增两枚侧键（前进/后退或自定义功能），满足用户快捷操作需求。
+2. **即插即用兼容性**：符合USB HID 1.1协议，无需驱动即可在Windows/macOS/Linux等系统下直接使用。
+
+### 3.13.1硬件设计
+
+在eg4基础上增加两个按键用以实现5键鼠标
+
+### 3.13.2 软件设计
+
+我们将usbd_custom_hid_if.c中CUSTOM_HID_ReportDesc_FS修改为Surface Dial的报告描述符;
+
+5键鼠标的报告描述符：
+
+```c
+__ALIGN_BEGIN static uint8_t CUSTOM_HID_ReportDesc_FS[USBD_CUSTOM_HID_REPORT_DESC_SIZE] __ALIGN_END =
+    {
+        /* USER CODE BEGIN 0 */
+        0x05, 0x01, // USAGE_PAGE (Generic Desktop)
+        0x09, 0x02, // USAGE (Mouse)
+        0xa1, 0x01, // COLLECTION (Application)
+        0x09, 0x01, //   USAGE (Pointer)
+        0xa1, 0x00, //   COLLECTION (Physical)
+        0x05, 0x09, //     USAGE_PAGE (Button)
+        0x19, 0x01, //     USAGE_MINIMUM (Button 1)
+        0x29, 0x05, //     USAGE_MAXIMUM (Button 5)
+        0x15, 0x00, //     LOGICAL_MINIMUM (0)
+        0x25, 0x01, //     LOGICAL_MAXIMUM (1)
+        0x95, 0x05, //     REPORT_COUNT (5)
+        0x75, 0x01, //     REPORT_SIZE (1)
+        0x81, 0x02, //     INPUT (Data,Var,Abs)
+        0x95, 0x01, //     REPORT_COUNT (1)
+        0x75, 0x03, //     REPORT_SIZE (3)
+        0x81, 0x03, //     INPUT (Cnst,Var,Abs)
+        0x05, 0x01, //     USAGE_PAGE (Generic Desktop)
+        0x09, 0x30, //     USAGE (X)
+        0x09, 0x31, //     USAGE (Y)
+        0x09, 0x38, //     USAGE (Wheel)
+        0x15, 0x81, //     LOGICAL_MINIMUM (-127)
+        0x25, 0x7f, //     LOGICAL_MAXIMUM (127)
+        0x75, 0x08, //     REPORT_SIZE (8)
+        0x95, 0x03, //     REPORT_COUNT (3)
+        0x81, 0x06, //     INPUT (Data,Var,Rel)
+        0xc0,       //   END_COLLECTION
+
+        /* USER CODE END 0 */
+        0xC0 /*     END_COLLECTION	             */
+};
+```
+
+可以看到只是在原来的基础上修改为5个按键而已；
+
+### 3.13.3 下载验证
+
+我们把固件程序下载进去，看到如下视频所示的5键鼠标：
+
+https://www.bilibili.com/video/BV1g1ooYZEEr/?vd_source=2bbde87de845d5220b1d8ba075c12fb0
+
