@@ -10,8 +10,8 @@
 5. 本公司所有学习板或相关产品资料： https://www.cnblogs.com/Li-Share/p/15222624.html
 
 
-- 广州联盾电子科技有限公司
+- e-play出品
 - QQ：1101495766
 - 技术邮箱：1101495766@qq.com
-- 淘宝店铺：https://shop460468074.taobao.com/
+- 淘宝店铺：https://shop129432197.taobao.com/?spm=pc_detail.29232929/evo365560b447259.shop_block.dshopinfo.2d657dd6VfPiId
 
